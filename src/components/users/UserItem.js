@@ -12,16 +12,17 @@ class UserItem extends Component {
   //     };
   // }
 
-  state = {
-    id: "id",
-    login: "mojombo",
-    avatar_url: "https://avatars0.githubusercontent.com/u/1?v=4",
-    html_url: "https://github.com/mojombo",
-  };
+  // No Longer Using state, we are using Props instead because this is what the USER is being passed in as
+  //   state = {
+  //     id: "id",
+  //     login: "mojombo",
+  //     avatar_url: "https://avatars0.githubusercontent.com/u/1?v=4",
+  //     html_url: "https://github.com/mojombo",
+  //   };
 
   render() {
     // destructured to get rid of the 'this.state.' in front of line 28 and 31
-    const { login, avatar_url, html_url } = this.state;
+    const { login, avatar_url, html_url } = this.props.user;
 
     return (
       <div className="card text-center">
