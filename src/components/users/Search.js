@@ -12,6 +12,7 @@ export class Search extends Component {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired,
   };
 
   // If you do NOT use an Arrow Function, you have to bind this to our function (such as line 19 for the onSubmit function)
@@ -22,8 +23,12 @@ export class Search extends Component {
   //   }
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.searchUsers(this.state.text);
-    this.setState({ text: "" });
+    if (this.state.text === "") {
+      this.props.setAlert("Please enter something", "light");
+    } else {
+      this.props.searchUsers(this.state.text);
+      this.setState({ text: "" });
+    }
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });

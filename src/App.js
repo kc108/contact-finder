@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Navbar from "./components/layout/Navbar";
 import Users from "./components/users/Users";
 import Search from "./components/users/Search";
+import Alert from "./components/layout/Alert";
 
 // import axios
 import axios from "axios";
@@ -13,6 +14,7 @@ class App extends Component {
     users: [],
     // REASON FOR LOADING: moment before data is fetched
     loading: false,
+    alert: null,
   };
 
   // lifecycle method
@@ -53,6 +55,16 @@ class App extends Component {
   // Clear users from state
   clearUsers = () => this.setState({ users: [], loading: false });
 
+  // Set Alert
+  setAlert = (msg, type) => {
+    this.setState({ alert: { msg, type } });
+    // SAME THING
+    // this.setState({ alert: { msg: msg, type: type } });
+
+    // ADD TIME OUT TO MAKE ALERT GO AWAY
+    setTimeout(() => this.setState({ alert: null }), 5000);
+  };
+
   render() {
     // const numbers = [1, 2, 3, 4];
 
@@ -64,10 +76,12 @@ class App extends Component {
         {/* <Navbar title={numbers} /> */}
         <Navbar />
         <div className="container">
+          <Alert alert={this.state.alert} />
           <Search
             searchUsers={this.searchUsers}
             clearUsers={this.clearUsers}
             showClear={users.length > 0 ? true : false}
+            setAlert={this.setAlert}
           />
           <Users loading={loading} users={users} />
         </div>
